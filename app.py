@@ -19,7 +19,7 @@ def create_csv():
     if not os.path.exists(file):
         with open(file, mode='w', newline ='') as f:
             writer = csv.writer(f)
-            writer.writerow(['meal_type', 'food_item', 'calories', 'fat'])
+            writer.writerow(['meal_type', 'food_item', 'calories', 'protein'])
 
 
 def get_data(food_query):
@@ -59,8 +59,8 @@ def get_data(food_query):
                         cal_string = parts[1].split("kcal")[0].strip()
                         processed_result["calories"] = int(cal_string)
                         
-                        fat_string = description.split("Fat:")[1].split("g")[0].strip()
-                        processed_result["fat"] = float(fat_string)
+                        protien_string = description.split("Protein:")[1].split("g")[0].strip()
+                        processed_result["protein"] = float(protien_string)
                     except Exception:
                         pass
                         
@@ -94,14 +94,14 @@ def add_meal():
     data = get_data(food_input)
     if data:
         cals = data['calories']
-        fat = data['fat']
+        prot = data['protein']
     else:
         cals = 100
-        fat = 2
+        prot = 5.0
 
     with open(file, mode='a', newline= '') as f:
         writer = csv.writer(f)
-        writer.writerow([meal_type, food_input.title(), cals, fat])
+        writer.writerow([meal_type, food_input.title(), cals, prot])
     
     return redirect(url_for('index'))
 

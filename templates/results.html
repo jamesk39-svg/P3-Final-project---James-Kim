@@ -20,21 +20,21 @@
                 <h3>Original Item: {{ original.title() }}</h3>
                 <p><strong>Category:</strong> {{ original_data['category'] }}</p>
                 <p><strong>Calories:</strong> {{ original_data['calories'] }} kcal</p>
-                <p><strong>Fat content:</strong> {{ original_data['fat'] }}g</p>
+                <p><strong>Protein content:</strong> {{ original_data['protein'] }}g</p>
             </div>
             
             <div style="flex: 1; background: #d4edda; padding: 15px; border-radius: 6px;">
                 <h3>Suggested Alternative: {{ alt_name.title() }}</h3>
                 <p><strong>Category:</strong> {{ alt_data['category'] }}</p>
                 <p><strong>Calories:</strong> {{ alt_data['calories'] }} kcal</p>
-                <p><strong>Fat content:</strong> {{ alt_data['fat'] }}g</p>
+                <p><strong>Protein content:</strong> {{ alt_data['protein'] }}g</p>
             </div>
         </div>
         
         <div class="success-box">
             <p><strong>Value Added Analysis:</strong> Swapping your choice saves you 
-            <strong>{{ original_data['calories'] - alt_data['calories'] }} calories</strong> and 
-            <strong>{{ original_data['fat'] - alt_data['fat'] }} grams of fat</strong>!</p>
+            <strong>{{ original_data['calories'] - alt_data['calories'] }} calories</strong> and gives
+            <strong>{{ alt_data['protein'] - original_data['protein'] }} grams of protein</strong>!</p>
         </div>
     {% endif %}
 {% endblock %}
