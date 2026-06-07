@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Smart Food Swaps</h1>
+    <p>Enter a food to calculate healthier alternatives via our database mapping logic.</p>
+
+    <form action="/find-alternative" method="POST">
+        <label for="user_food">Enter food to search:</label>
+        <input type="text" id="user_food" name="user_food" placeholder="e.g., whole milk, white rice, potato chips" required>
+        <button type="submit" style="background-color: #007BFF;">Scan for Alternative</button>
+    </form>
+
+    {% if error %}
+        <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    {% if original_data and alt_data %}
+        <h2>Swap Recommendation Results</h2>
+        <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 20px;">
+            <div style="flex: 1; background: #f8d7da; padding: 15px; border-radius: 6px;">
+                <h3>Original Item: {{ original.title() }}</h3>
+                <p><strong>Category:</strong> {{ original_data['category'] }}</p>
+                <p><strong>Calories:</strong> {{ original_data['calories'] }} kcal</p>
+                <p><strong>Fat content:</strong> {{ original_data['fat'] }}g</p>
+            </div>
+            
+            <div style="flex: 1; background: #d4edda; padding: 15px; border-radius: 6px;">
+                <h3>Suggested Alternative: {{ alt_name.title() }}</h3>
+                <p><strong>Category:</strong> {{ alt_data['category'] }}</p>
+                <p><strong>Calories:</strong> {{ alt_data['calories'] }} kcal</p>
+                <p><strong>Fat content:</strong> {{ alt_data['fat'] }}g</p>
+            </div>
+        </div>
+        
+        <div class="success-box">
+            <p><strong>Value Added Analysis:</strong> Swapping your choice saves you 
+            <strong>{{ original_data['calories'] - alt_data['calories'] }} calories</strong> and 
+            <strong>{{ original_data['fat'] - alt_data['fat'] }} grams of fat</strong>!</p>
+        </div>
+    {% endif %}
+{% endblock %}

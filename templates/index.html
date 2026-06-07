@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>NutriTrack Meal Log</h1>
+    <p>Track your daily targets using real-time insights modeled off the FatSecret API framework.</p>
+
+    <h2>Log a New Meal</h2>
+    <form action="/add-meal" method="POST">
+        <label for="meal_type">Select Meal Window:</label>
+        <select name="meal_type" id="meal_type">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+        </select>
+
+        <label for="food_input">Type Food Item (e.g., 'whole milk', 'white rice', 'potato chips'):</label>
+        <input type="text" id="food_input" name="food_input" required placeholder="Type food item precisely...">
+        
+        <button type="submit">Log Food to CSV File</button>
+    </form>
+
+    <hr>
+
+    <h2>Today's Tracked Log</h2>
+    <p><strong>Total Calorie Accumulation:</strong> {{ total_calories }} / 2000 kcal</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Meal Window</th>
+                <th>Food Item Name</th>
+                <th>Calories (kcal)</th>
+                <th>Fat (g)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log['meal_type'] }}</td>
+                <td>{{ log['food_item'] }}</td>
+                <td>{{ log['calories'] }}</td>
+                <td>{{ log['fat'] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center;">No items tracked today yet. Get started above!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,2 @@
+ai statement: ai helped with formatting the results html and some of the index html as well as assisting me in applying the find alternative function. 
+Helped modify code for get_data function as well
